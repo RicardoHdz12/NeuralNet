@@ -52,7 +52,7 @@ def Levenberg_Marquart_training_(X, Y, params, max_iter):
         inputs_end = model.inputs[-1]
         hidden_out = model.hidden_out[-1]  # Salidas ocultas de la ultima capa
         phi_out = model.phi_[-1]  # Derivadas de la ultima capa
-        for s in range(Y.shape[1]):
+        for s in range(Y.shape[0]):
             model.inputs[-1] = inputs_end[:, s]
             model.hidden_out[-1] = hidden_out[:, s]
             model.phi_[-1] = phi_out[:, s]
@@ -126,8 +126,8 @@ def Levenberg_Marquart_training_(X, Y, params, max_iter):
         # Avances en las iteraciones del algoritmo
 
         if iter_ % n_disp == 0 and params.view_process:
-            progress = 100 * (iter / max_iter)
-            print(f'Progress {progress:.1f}%: {iter} epochs were reached, with a loss {model.loss[iter_]:.6f}')
+            progress = 100 * (iter_ / max_iter)
+            print(f'Progress {progress:.1f}%: {iter_} epochs were reached, with a loss {model.loss[iter_]:.6f}')
 
         # Criterio de paro del algoritmo de entrenamiento
         if model.loss[iter_] <= params.tol_loss or abs(model.loss[iter_] - Jloss0) <= params.tol_dJ:
@@ -140,6 +140,6 @@ def Levenberg_Marquart_training_(X, Y, params, max_iter):
         iter = iter_ + 1
 
     if params.view_process:
-        print(f'{iter_} epochs were reached, with a loss {model.loss[iter_ - 1]:.3f}')
+        print(f'{iter} epochs were reached, with a loss {model.loss[iter - 1]:.3f}')
 
     return params, model

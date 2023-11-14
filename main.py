@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
 from libraries_.Grad_Desc_training_ import Grad_Desc_training_
 from libraries_.f_sigmoid import f_sigmoid
